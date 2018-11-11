@@ -53,6 +53,12 @@ router.post('/', (req, res, next) => {
   }
 
   // 7. UNINSTALL
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#UNINSTALL
+  if (req.body.lifecycle === 'UNINSTALL') {
+    res.status(200).json({
+      uninstallData: {}
+    });
+  }
 });
 
 module.exports = router;

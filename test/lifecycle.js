@@ -7,6 +7,7 @@ const INSTALL = require('./res/INSTALL');
 const UPDATE = require('./res/UPDATE');
 const EVENT = require('./res/EVENT');
 const OAUTH_CALLBACK = require('./res/OAUTH_CALLBACK');
+const UNINSTALL = require('./res/UNINSTALL');
 
 const testCaseFactory = (API) => {
   return async () => {
@@ -42,4 +43,5 @@ describe('lifecycle', () => {
   it('OAUTH_CALLBACK', testCaseFactory(OAUTH_CALLBACK));
 
   // 7. UNINSTALL
+  it('UNINSTALL', testCaseFactory(UNINSTALL));
 });
