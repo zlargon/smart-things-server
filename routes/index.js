@@ -45,6 +45,12 @@ router.post('/', (req, res, next) => {
   }
 
   // 6. OAUTH_CALLBACK
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#OAUTH_CALLBACK
+  if (req.body.lifecycle === 'OAUTH_CALLBACK') {
+    res.status(200).json({
+      oAuthCallbackData: {}
+    });
+  }
 
   // 7. UNINSTALL
 });
