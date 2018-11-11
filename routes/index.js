@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/', (req, res, next) => {
   console.log(req.body);
 
-  // PING
+  // 1. PING
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#PING
   if (req.body.lifecycle === 'PING') {
     res.status(200).json({
@@ -18,6 +18,17 @@ router.post('/', (req, res, next) => {
     });
   }
 
+  // 2. CONFIGURATION
+
+  // 3. INSTALL
+
+  // 4. UPDATE
+
+  // 5. EVENT
+
+  // 6. OAUTH_CALLBACK
+
+  // 7. UNINSTALL
 });
 
 module.exports = router;
