@@ -21,6 +21,12 @@ router.post('/', (req, res, next) => {
   // 2. CONFIGURATION
 
   // 3. INSTALL
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#INSTALL
+  if (req.body.lifecycle === 'INSTALL') {
+    res.status(200).json({
+      installData: {}
+    });
+  }
 
   // 4. UPDATE
 
