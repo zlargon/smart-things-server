@@ -5,6 +5,7 @@ const expect = chai.expect;
 const PING = require('./res/PING');
 const INSTALL = require('./res/INSTALL');
 const UPDATE = require('./res/UPDATE');
+const EVENT = require('./res/EVENT');
 
 const testCaseFactory = (API) => {
   return async () => {
@@ -34,6 +35,7 @@ describe('lifecycle', () => {
   it('UPDATE', testCaseFactory(UPDATE));
 
   // 5. EVENT
+  it('EVENT', testCaseFactory(EVENT));
 
   // 6. OAUTH_CALLBACK
 

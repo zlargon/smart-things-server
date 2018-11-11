@@ -37,6 +37,12 @@ router.post('/', (req, res, next) => {
   }
 
   // 5. EVENT
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#EVENT
+  if (req.body.lifecycle === 'EVENT') {
+    res.status(200).json({
+      eventData: {}
+    });
+  }
 
   // 6. OAUTH_CALLBACK
 
