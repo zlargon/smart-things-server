@@ -29,6 +29,12 @@ router.post('/', (req, res, next) => {
   }
 
   // 4. UPDATE
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#UPDATE
+  if (req.body.lifecycle === 'UPDATE') {
+    res.status(200).json({
+      updateData: {}
+    });
+  }
 
   // 5. EVENT
 
