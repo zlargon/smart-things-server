@@ -37,7 +37,7 @@ module.exports = ({ configurationData, settings }) => {
                   description: 'Tap to set',
                   type: 'DEVICE',
                   required: true,
-                  multiple: false,
+                  multiple: true,
                   capabilities: ['contactSensor'],
 
                   // need read permission to create subscriptions!
