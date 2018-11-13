@@ -4,13 +4,8 @@ const router = express.Router();
 // install customized console
 require('./customized-console');
 
-const subscription = require('./subscription');
-const lifecycle = {
-  configuration: require('./lifecycle/configuration'),
-  install: require('./lifecycle/install'),
-  update: require('./lifecycle/update'),
-  event: require('./lifecycle/event')
-};
+// SmartThings Lifecycle
+const lifecycle = require('./lifecycle');
 
 const showRequestBody = (body) => {
   let title = body.lifecycle;
