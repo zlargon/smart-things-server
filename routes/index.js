@@ -1,5 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const prettyjson = require('prettyjson');
+
+const showRequestBody = (body) => {
+  let title = body.lifecycle;
+  if (body.lifecycle === 'CONFIGURATION') {
+    title += ' - ' + body.configurationData.phase;
+  }
+
+  console.log('\n\n');
+  console.log('\x1b[33m%s\x1b[0m', title);
+  console.log(prettyjson.render(body));
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -8,7 +20,7 @@ router.get('/', function(req, res, next) {
 
 // Samsung Lifecycle
 router.post('/', (req, res, next) => {
-  console.log(req.body);
+  showRequestBody(req.body);
 
   // 1. PING
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#PING
