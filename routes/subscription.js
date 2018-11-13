@@ -7,11 +7,11 @@ const create = async (installedAppId, authToken, deviceConfig) => {
     device: {
       componentId: deviceConfig.componentId,
       deviceId: deviceConfig.deviceId,
-      capability: 'contactSensor',      // *
-      attribute: 'contact',             // *
       stateChangeOnly: true,
-      subscriptionName: "contact_subscription",
-      value: "*"                        // open / closed
+      subscriptionName: "status_change",
+      capability: '*',  // contactSensor
+      attribute: '*',   // contact
+      value: "*"        // open/closed
     }
   };
 
