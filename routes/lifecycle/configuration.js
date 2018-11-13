@@ -5,8 +5,8 @@ module.exports = ({ configurationData, settings }) => {
     return {
       configurationData: {
         initialize: {
-          name: 'Your app name',
-          description: 'Some app description',
+          name: 'NUCoach',
+          description: 'Upload data to NUCoach',
           id: 'app',
 
           // Need list devices permission for app to allow user to select devices
@@ -23,25 +23,25 @@ module.exports = ({ configurationData, settings }) => {
       configurationData: {
         page: {
           pageId: '1',
-          name: 'Some page name',
+          name: 'NUCoach',
           nextPageId: null,
           previousPageId: null,
           complete: true, // last page
+
+          // sections
           sections: [
             {
-              name: 'When this opens...',
+              name: 'contact sensor',
               settings: [
                 {
                   id: 'contactSensor',
-                  name: 'Which contact sensor?',
+                  name: 'Please select the Contact Sensors you want to upload data to NUCoach.',
                   description: 'Tap to set',
                   type: 'DEVICE',
                   required: true,
                   multiple: true,
                   capabilities: ['contactSensor'],
-
-                  // need read permission to create subscriptions!
-                  permissions: ['r']
+                  permissions: ['r']  // r, w, x
                 }
               ]
             }
