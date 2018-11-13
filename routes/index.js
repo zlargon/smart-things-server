@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const prettyjson = require('prettyjson');
 const subscription = require('./subscription');
+
+console.yellow = (msg) => {
+  console.log('\x1b[33m%s\x1b[0m', msg);
+}
+
+console.json = (data) => {
+  console.log(JSON.stringify(data, null, 2));
+}
 
 const lifecycle = {
   configuration: require('./lifecycle/configuration')
@@ -14,8 +21,8 @@ const showRequestBody = (body) => {
   }
 
   console.log('\n\n');
-  console.log('\x1b[33m%s\x1b[0m', title);
-  console.log(prettyjson.render(body));
+  console.yellow(title);
+  console.json(body);
 }
 
 /* GET home page. */
