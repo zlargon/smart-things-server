@@ -59,7 +59,29 @@ router.post('/', (req, res, next) => {
     (async () => {
       console.yellow('Subscription Create');
       for (const contactSensor of updateData.installedApp.config.contactSensor) {
-        await subscription.create(installedAppId, authToken, contactSensor.deviceConfig);
+        try {
+          await subscription.create(
+            installedAppId,
+            authToken,
+            'contact_sensor_sub',
+            contactSensor.deviceConfig
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      for (const motionSensor of updateData.installedApp.config.motionSensor) {
+        try {
+          await subscription.create(
+            installedAppId,
+            authToken,
+            'motion_sensor_sub',
+            motionSensor.deviceConfig
+          );
+        } catch (e) {
+          console.log(e);
+        }
       }
 
       res.status(200).json({
@@ -77,11 +99,37 @@ router.post('/', (req, res, next) => {
 
     (async () => {
       console.yellow('Subscription Remove');
-      await subscription.remove(installedAppId, authToken);
+      try {
+        await subscription.remove(installedAppId, authToken);
+      } catch (e) {
+        console.log(e);
+      }
 
       console.yellow('Subscription Create');
       for (const contactSensor of updateData.installedApp.config.contactSensor) {
-        await subscription.create(installedAppId, authToken, contactSensor.deviceConfig);
+        try {
+          await subscription.create(
+            installedAppId,
+            authToken,
+            'contact_sensor_sub',
+            contactSensor.deviceConfig
+          );
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      for (const motionSensor of updateData.installedApp.config.motionSensor) {
+        try {
+          await subscription.create(
+            installedAppId,
+            authToken,
+            'motion_sensor_sub',
+            motionSensor.deviceConfig
+          );
+        } catch (e) {
+          console.log(e);
+        }
       }
 
       res.status(200).json({

@@ -27,21 +27,34 @@ module.exports = ({ configurationData, settings }) => {
           nextPageId: null,
           previousPageId: null,
           complete: true, // last page
-
-          // sections
           sections: [
             {
               name: 'contact sensor',
               settings: [
                 {
                   id: 'contactSensor',
-                  name: 'Please select the Contact Sensors you want to upload data to NUCoach.',
+                  name: 'Which Contact Sensors?',
                   description: 'Tap to set',
                   type: 'DEVICE',
                   required: true,
                   multiple: true,
                   capabilities: ['contactSensor'],
                   permissions: ['r']  // r, w, x
+                }
+              ]
+            },
+            {
+              name: 'montion sensor',
+              settings: [
+                {
+                  id: 'motionSensor',
+                  name: 'Which Montion Sensor?',
+                  description: 'Tap to set',
+                  type: 'DEVICE',
+                  required: true,
+                  multiple: true,
+                  capabilities: ['motionSensor'],
+                  permissions: ['r']
                 }
               ]
             }

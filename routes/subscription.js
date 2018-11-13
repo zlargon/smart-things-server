@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const create = async (installedAppId, authToken, deviceConfig) => {
+const create = async (installedAppId, authToken, subscriptionName, deviceConfig) => {
   const url = `https://api.smartthings.com/installedapps/${installedAppId}/subscriptions`;
   const body = {
     sourceType: 'DEVICE',
@@ -8,7 +8,7 @@ const create = async (installedAppId, authToken, deviceConfig) => {
       componentId: deviceConfig.componentId,
       deviceId: deviceConfig.deviceId,
       stateChangeOnly: true,
-      subscriptionName: "status_change",
+      subscriptionName,
       capability: '*',  // contactSensor
       attribute: '*',   // contact
       value: "*"        // open/closed
@@ -28,7 +28,7 @@ const create = async (installedAppId, authToken, deviceConfig) => {
 
   // fail
   if (res.status !== 200) {
-    const err = new Error('failed to create subscription');
+    const err = new Error(`failed to create subscription ${subscriptionName}`);
     err.data = data;
     throw err;
   }
