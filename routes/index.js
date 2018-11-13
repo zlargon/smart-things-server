@@ -18,11 +18,6 @@ const showRequestBody = (body) => {
   console.json(body);
 }
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 // Samsung Lifecycle
 router.post('/', (req, res, next) => {
   showRequestBody(req.body);
