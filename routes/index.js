@@ -52,9 +52,20 @@ router.post('/', (req, res, next) => {
   // 3. INSTALL
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#INSTALL
   if (req.body.lifecycle === 'INSTALL') {
-    res.status(200).json({
-      installData: {}
-    });
+    const { installData } = req.body;
+    const authToken = installData.authToken;
+    const installedAppId = installData.installedApp.installedAppId;
+
+    (async () => {
+      console.yellow('Subscription Create');
+      for (const contactSensor of updateData.installedApp.config.contactSensor) {
+        await subscription.create(installedAppId, authToken, contactSensor.deviceConfig);
+      }
+
+      res.status(200).json({
+        installData: {}
+      });
+    })();
   }
 
   // 4. UPDATE
@@ -63,14 +74,15 @@ router.post('/', (req, res, next) => {
     const { updateData } = req.body;
     const authToken = updateData.authToken;
     const installedAppId = updateData.installedApp.installedAppId;
-    const deviceConfig = updateData.installedApp.config.contactSensor[0].deviceConfig;
 
     (async () => {
       console.yellow('Subscription Remove');
       await subscription.remove(installedAppId, authToken);
 
       console.yellow('Subscription Create');
-      await subscription.create(installedAppId, authToken, deviceConfig);
+      for (const contactSensor of updateData.installedApp.config.contactSensor) {
+        await subscription.create(installedAppId, authToken, contactSensor.deviceConfig);
+      }
 
       res.status(200).json({
         updateData: {}
