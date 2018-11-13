@@ -1,15 +1,10 @@
 const express = require('express');
 const router = express.Router();
+
+// install customized console
+require('./customized-console');
+
 const subscription = require('./subscription');
-
-console.yellow = (msg) => {
-  console.log('\x1b[33m%s\x1b[0m', msg);
-}
-
-console.json = (data) => {
-  console.log(JSON.stringify(data, null, 2));
-}
-
 const lifecycle = {
   configuration: require('./lifecycle/configuration'),
   install: require('./lifecycle/install'),
