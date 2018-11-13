@@ -1,5 +1,42 @@
 const fetch = require('node-fetch');
 
+const create = async (installedAppId, authToken, deviceConfig) => {
+  const url = `https://api.smartthings.com/installedapps/${installedAppId}/subscriptions`;
+  const body = {
+    sourceType: 'DEVICE',
+    device: {
+      componentId: deviceConfig.componentId,
+      deviceId: deviceConfig.deviceId,
+      capability: 'contactSensor',      // *
+      attribute: 'contact',             // *
+      stateChangeOnly: true,
+      subscriptionName: "contact_subscription",
+      value: "*"                        // open / closed
+    }
+  };
+
+  const res = await fetch(url, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken
+    },
+    body: JSON.stringify(body)
+  });
+
+  const data = await res.json();
+
+  // fail
+  if (res.status !== 200) {
+    const err = new Error('failed to create subscription');
+    err.data = data;
+    throw err;
+  }
+
+  // success
+  return data;
+}
+
 const remove = async (installedAppId, authToken) => {
   const url = `https://api.smartthings.com/installedapps/${installedAppId}/subscriptions`;
   const res = await fetch(url, {
@@ -24,5 +61,6 @@ const remove = async (installedAppId, authToken) => {
 }
 
 module.exports = {
+  create,
   remove
 }

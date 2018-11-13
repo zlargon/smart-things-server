@@ -63,22 +63,19 @@ router.post('/', (req, res, next) => {
     const { updateData } = req.body;
     const authToken = updateData.authToken;
     const installedAppId = updateData.installedApp.installedAppId;
+    const deviceConfig = updateData.installedApp.config.contactSensor[0].deviceConfig;
 
-    subscription
-      .remove(installedAppId, authToken)
-      .then(data => {
-        console.log('succeed to delete subscription');
+    (async () => {
+      console.yellow('Subscription Remove');
+      await subscription.remove(installedAppId, authToken);
 
-        // TODO: create subscription
-      })
-      .catch(err => {
-        console.log('failed to detele subscription');
-      })
-      .then(() => {
-        res.status(200).json({
-          updateData: {}
-        });
+      console.yellow('Subscription Create');
+      await subscription.create(installedAppId, authToken, deviceConfig);
+
+      res.status(200).json({
+        updateData: {}
       });
+    })();
   }
 
   // 5. EVENT
