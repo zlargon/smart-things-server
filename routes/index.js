@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const prettyjson = require('prettyjson');
+const subscription = require('./subscription');
 
 const lifecycle = {
   configuration: require('./lifecycle/configuration')
@@ -52,9 +53,25 @@ router.post('/', (req, res, next) => {
   // 4. UPDATE
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#UPDATE
   if (req.body.lifecycle === 'UPDATE') {
-    res.status(200).json({
-      updateData: {}
-    });
+    const { updateData } = req.body;
+    const authToken = updateData.authToken;
+    const installedAppId = updateData.installedApp.installedAppId;
+
+    subscription
+      .remove(installedAppId, authToken)
+      .then(data => {
+        console.log('succeed to delete subscription');
+
+        // TODO: create subscription
+      })
+      .catch(err => {
+        console.log('failed to detele subscription');
+      })
+      .then(() => {
+        res.status(200).json({
+          updateData: {}
+        });
+      });
   }
 
   // 5. EVENT
