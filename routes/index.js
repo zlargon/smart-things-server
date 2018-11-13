@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const prettyjson = require('prettyjson');
 
+const lifecycle = {
+  configuration: require('./lifecycle/configuration')
+};
+
 const showRequestBody = (body) => {
   let title = body.lifecycle;
   if (body.lifecycle === 'CONFIGURATION') {
@@ -31,6 +35,11 @@ router.post('/', (req, res, next) => {
   }
 
   // 2. CONFIGURATION
+  // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#CONFIGURATION
+  if (req.body.lifecycle === 'CONFIGURATION') {
+    const result = lifecycle.configuration(req.body);
+    res.status(200).json(result);
+  }
 
   // 3. INSTALL
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#INSTALL
