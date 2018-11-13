@@ -11,7 +11,9 @@ console.json = (data) => {
 }
 
 const lifecycle = {
-  configuration: require('./lifecycle/configuration')
+  configuration: require('./lifecycle/configuration'),
+  install: require('./lifecycle/install'),
+  update: require('./lifecycle/update')
 };
 
 const showRequestBody = (body) => {
@@ -52,90 +54,29 @@ router.post('/', (req, res, next) => {
   // 3. INSTALL
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#INSTALL
   if (req.body.lifecycle === 'INSTALL') {
-    const { installData } = req.body;
-    const authToken = installData.authToken;
-    const installedAppId = installData.installedApp.installedAppId;
+    const data = req.body.installData;
 
-    (async () => {
-      console.yellow('Subscription Create');
-      for (const contactSensor of updateData.installedApp.config.contactSensor) {
-        try {
-          await subscription.create(
-            installedAppId,
-            authToken,
-            'contact_sensor_sub',
-            contactSensor.deviceConfig
-          );
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      for (const motionSensor of updateData.installedApp.config.motionSensor) {
-        try {
-          await subscription.create(
-            installedAppId,
-            authToken,
-            'motion_sensor_sub',
-            motionSensor.deviceConfig
-          );
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      res.status(200).json({
-        installData: {}
-      });
-    })();
+    lifecycle
+      .install(data)
+      .then(() => {
+        res.status(200).json({
+          installData: {}
+        });
+      })
   }
 
   // 4. UPDATE
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#UPDATE
   if (req.body.lifecycle === 'UPDATE') {
-    const { updateData } = req.body;
-    const authToken = updateData.authToken;
-    const installedAppId = updateData.installedApp.installedAppId;
+    const data = req.body.updateData;
 
-    (async () => {
-      console.yellow('Subscription Remove');
-      try {
-        await subscription.remove(installedAppId, authToken);
-      } catch (e) {
-        console.log(e);
-      }
-
-      console.yellow('Subscription Create');
-      for (const contactSensor of updateData.installedApp.config.contactSensor) {
-        try {
-          await subscription.create(
-            installedAppId,
-            authToken,
-            'contact_sensor_sub',
-            contactSensor.deviceConfig
-          );
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      for (const motionSensor of updateData.installedApp.config.motionSensor) {
-        try {
-          await subscription.create(
-            installedAppId,
-            authToken,
-            'motion_sensor_sub',
-            motionSensor.deviceConfig
-          );
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      res.status(200).json({
-        updateData: {}
+    lifecycle
+      .update(data)
+      .then(() => {
+        res.status(200).json({
+          updateData: {}
+        });
       });
-    })();
   }
 
   // 5. EVENT
