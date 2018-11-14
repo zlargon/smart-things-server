@@ -28,8 +28,8 @@ app.post('/', (req, res, next) => {
 
   // 1. PING
   if (body.lifecycle === 'PING') {
-    res.status(200).json({
-      pingData: body.pingData
+    lifecycle.ping(body).then(result => {
+      res.status(200).json(result);
     });
   }
 
