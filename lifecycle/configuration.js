@@ -1,4 +1,4 @@
-module.exports = ({ configurationData, settings }) => {
+module.exports = async ({ configurationData, settings }) => {
 
   // INITIALIZE
   if (configurationData.phase === 'INITIALIZE') {

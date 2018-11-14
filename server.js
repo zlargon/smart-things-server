@@ -35,8 +35,9 @@ app.post('/', (req, res, next) => {
 
   // 2. CONFIGURATION
   if (body.lifecycle === 'CONFIGURATION') {
-    const result = lifecycle.configuration(body);
-    res.status(200).json(result);
+    lifecycle.configuration(body).then(result => {
+      res.status(200).json(result);
+    });
   }
 
   // 3. INSTALL
