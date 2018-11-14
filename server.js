@@ -42,15 +42,9 @@ app.post('/', (req, res, next) => {
 
   // 3. INSTALL
   if (body.lifecycle === 'INSTALL') {
-    const data = body.installData;
-
-    lifecycle
-      .install(data)
-      .then(() => {
-        res.status(200).json({
-          installData: {}
-        });
-      })
+    lifecycle.install(body).then(result => {
+      res.status(200).json(result);
+    })
   }
 
   // 4. UPDATE

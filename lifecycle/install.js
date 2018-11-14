@@ -1,6 +1,6 @@
 const subscription = require('../lib/subscription');
 
-module.exports = async (data) => {
+module.exports = async ({ installData: data }) => {
   const authToken = data.authToken;
   const installedAppId = data.installedApp.installedAppId;
 
@@ -33,5 +33,9 @@ module.exports = async (data) => {
       console.json(e);
     }
   }
+
+  return {
+    installData: {}
+  };
 }
 
