@@ -56,15 +56,9 @@ app.post('/', (req, res, next) => {
 
   // 5. EVENT
   if (body.lifecycle === 'EVENT') {
-    const data = body.eventData;
-
-    lifecycle
-      .event(data)
-      .then(() => {
-        res.status(200).json({
-          eventData: {}
-        });
-      });
+    lifecycle.event(body).then(result => {
+      res.status(200).json(result);
+    });
   }
 
   // 6. OAUTH_CALLBACK
