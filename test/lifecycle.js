@@ -42,10 +42,10 @@ describe('lifecycle', () => {
   });
 
   // 3. INSTALL
-  // it('INSTALL', testCaseFactory(INSTALL));
+  it('INSTALL', testCaseFactory(INSTALL));
 
   // 4. UPDATE
-  // it('UPDATE', testCaseFactory(UPDATE));
+  it('UPDATE', testCaseFactory(UPDATE));
 
   // 5. EVENT
   it('EVENT', testCaseFactory(EVENT));
