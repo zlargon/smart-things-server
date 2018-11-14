@@ -3,5 +3,6 @@ module.exports = {
   configuration: require('./configuration'),
   install: require('./install'),
   update: require('./update'),
-  event: require('./event')
+  event: require('./event'),
+  oAuthCallback: require('./oAuthCallback')
 };

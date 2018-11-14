@@ -63,8 +63,8 @@ app.post('/', (req, res, next) => {
 
   // 6. OAUTH_CALLBACK
   if (body.lifecycle === 'OAUTH_CALLBACK') {
-    res.status(200).json({
-      oAuthCallbackData: {}
+    lifecycle.oAuthCallback(body).then(result => {
+      res.status(200).json(result);
     });
   }
 
