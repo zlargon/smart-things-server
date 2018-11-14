@@ -3,6 +3,10 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const PING = require('./res/PING');
+const CONFIGURATION = {
+  INITIALIZE: require('./res/CONFIGURATION-INITIALIZE'),
+  PAGE: require('./res/CONFIGURATION-PAGE')
+};
 const INSTALL = require('./res/INSTALL');
 const UPDATE = require('./res/UPDATE');
 const EVENT = require('./res/EVENT');
@@ -29,6 +33,13 @@ describe('lifecycle', () => {
   it('PING', testCaseFactory(PING));
 
   // 2. CONFIGURATION
+  describe('CONFIGURATION', () => {
+    // Phase: INITIALIZE
+    it('INITIALIZE', testCaseFactory(CONFIGURATION.INITIALIZE));
+
+    // Phase: Page
+    it('PAGE', testCaseFactory(CONFIGURATION.PAGE));
+  });
 
   // 3. INSTALL
   // it('INSTALL', testCaseFactory(INSTALL));
