@@ -8,7 +8,7 @@ const request = {
   }
 }
 
-const responseBody = {
+const response = {
   "pingData": {
     "challenge": "1a904d57-4fab-4b15-a11e-1c4bfe7cb502"
   }
@@ -16,6 +16,5 @@ const responseBody = {
 
 module.exports = {
   request,
-  responseStatus: 200,
-  responseBody
+  response
 }

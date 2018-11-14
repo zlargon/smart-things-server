@@ -48,12 +48,11 @@ const request = {
   }
 }
 
-const responseBody = {
+const response = {
   "uninstallData": {}
 }
 
 module.exports = {
   request,
-  responseStatus: 200,
-  responseBody
+  response
 }

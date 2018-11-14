@@ -50,12 +50,11 @@ const request = {
   }
 }
 
-const responseBody = {
+const response = {
   "installData": {}
 }
 
 module.exports = {
   request,
-  responseStatus: 200,
-  responseBody
+  response
 }

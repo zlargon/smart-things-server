@@ -9,17 +9,17 @@ const EVENT = require('./res/EVENT');
 const OAUTH_CALLBACK = require('./res/OAUTH_CALLBACK');
 const UNINSTALL = require('./res/UNINSTALL');
 
-const testCaseFactory = (API) => {
+const testCaseFactory = ({ request, response }) => {
   return async () => {
     const res = await fetch('http://localhost:3000', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(API.request)
+      body: JSON.stringify(request)
     });
-    expect(res.status).to.equal(API.responseStatus);
+    expect(res.status).to.equal(200);
 
     const body = await res.json();
-    expect(JSON.stringify(body)).to.equal(JSON.stringify(API.responseBody));
+    expect(JSON.stringify(body)).to.equal(JSON.stringify(response));
   }
 }
 
@@ -31,10 +31,10 @@ describe('lifecycle', () => {
   // 2. CONFIGURATION
 
   // 3. INSTALL
-  it('INSTALL', testCaseFactory(INSTALL));
+  // it('INSTALL', testCaseFactory(INSTALL));
 
   // 4. UPDATE
-  it('UPDATE', testCaseFactory(UPDATE));
+  // it('UPDATE', testCaseFactory(UPDATE));
 
   // 5. EVENT
   it('EVENT', testCaseFactory(EVENT));

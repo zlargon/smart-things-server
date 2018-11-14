@@ -9,12 +9,11 @@ const request = {
   }
 }
 
-const responseBody = {
+const response = {
   "oAuthCallbackData": {}
 }
 
 module.exports = {
   request,
-  responseStatus: 200,
-  responseBody
+  response
 }

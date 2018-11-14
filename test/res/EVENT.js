@@ -78,12 +78,11 @@ const request = {
   }
 }
 
-const responseBody = {
+const response = {
   "eventData": {}
 }
 
 module.exports = {
   request,
-  responseStatus: 200,
-  responseBody
+  response
 }
