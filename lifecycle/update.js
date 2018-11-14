@@ -1,4 +1,4 @@
-const subscription = require('../subscription');
+const subscription = require('../lib/subscription');
 
 module.exports = async (data) => {
   const authToken = data.authToken;

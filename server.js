@@ -1,5 +1,5 @@
 // install customized console
-require('./customized-console');
+require('./lib/console');
 
 const express = require('express');
 const morgan = require('morgan');
