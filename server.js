@@ -70,8 +70,8 @@ app.post('/', (req, res, next) => {
 
   // 7. UNINSTALL
   if (body.lifecycle === 'UNINSTALL') {
-    res.status(200).json({
-      uninstallData: {}
+    lifecycle.uninstall(body).then(result => {
+      res.status(200).json(result);
     });
   }
 });

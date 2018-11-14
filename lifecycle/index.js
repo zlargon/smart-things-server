@@ -4,5 +4,6 @@ module.exports = {
   install: require('./install'),
   update: require('./update'),
   event: require('./event'),
-  oAuthCallback: require('./oAuthCallback')
+  oAuthCallback: require('./oAuthCallback'),
+  uninstall: require('./uninstall')
 };
