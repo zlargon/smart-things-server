@@ -49,15 +49,9 @@ app.post('/', (req, res, next) => {
 
   // 4. UPDATE
   if (body.lifecycle === 'UPDATE') {
-    const data = body.updateData;
-
-    lifecycle
-      .update(data)
-      .then(() => {
-        res.status(200).json({
-          updateData: {}
-        });
-      });
+    lifecycle.update(body).then(result => {
+      res.status(200).json(result);
+    });
   }
 
   // 5. EVENT
