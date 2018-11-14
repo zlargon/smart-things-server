@@ -7,20 +7,18 @@ require('./customized-console');
 // SmartThings Lifecycle
 const lifecycle = require('./lifecycle');
 
-const showRequestBody = (body) => {
-  let title = body.lifecycle;
+const showLifecycle = (body) => {
+  let title = '\nLIFECYCLE: ' + body.lifecycle;
   if (body.lifecycle === 'CONFIGURATION') {
     title += ' - ' + body.configurationData.phase;
   }
 
-  console.log('\n\n');
   console.yellow(title);
-  console.json(body);
 }
 
 // Samsung Lifecycle
 router.post('/', (req, res, next) => {
-  showRequestBody(req.body);
+  showLifecycle(req.body);
 
   // 1. PING
   // https://smartthings.developer.samsung.com/develop/guides/smartapps/lifecycles.html#PING
